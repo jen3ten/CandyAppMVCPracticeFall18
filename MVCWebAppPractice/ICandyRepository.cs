@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVCWebAppPractice.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ namespace MVCWebAppPractice
 {
     public interface ICandyRepository
     {
-        void GetAll();
+        List<Candy> GetAll();
+        Candy FindByName(string name);
     }
 }

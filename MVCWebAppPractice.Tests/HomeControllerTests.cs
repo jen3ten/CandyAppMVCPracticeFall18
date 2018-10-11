@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using MVCWebAppPractice.Controllers;
+using MVCWebAppPractice.Models;
 using NSubstitute;
 using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace MVCWebAppPractice.Tests
@@ -30,7 +32,7 @@ namespace MVCWebAppPractice.Tests
         [Fact]
         public void Index_Gets_AllCandies() 
         //HomeController instance was created, 
-        //Did the repo recieve the GetAll() call?
+        //Did the repo receive the GetAll() call?
         {
             sut.Index();
 
@@ -40,7 +42,17 @@ namespace MVCWebAppPractice.Tests
         [Fact]
         public void Index_Sets_Model_To_AllCandies()
         {
+            var expectedModel = new List<Candy>();
+            var result = sut.Index();
+            candyRepo.GetAll().Returns(expectedModel);
+        }
 
+        [Fact]
+        public void Details_Gets_One_Candy()
+        {
+            sut.Details("Snickers");
+
+            candyRepo.Received().FindByName("Snickers");
         }
     }
 }

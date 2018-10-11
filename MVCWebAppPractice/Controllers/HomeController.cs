@@ -22,5 +22,11 @@ namespace MVCWebAppPractice.Controllers
             this.candyRepo.GetAll();
             return View();
         }
+
+        public ViewResult Details(string name)
+        {
+            this.candyRepo.FindByName(name);
+            return View();
+        }
     }
 }
